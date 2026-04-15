@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        body {
+            background: #0a0a0f;
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #f84464;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>💳 Complete Payment</h1>
+
+<button id="pay-btn">Pay Now</button>
+
+<script>
+var options = {
+    "key": "rzp_test_SdNaLxEqcV4h3F",   // 🔥 put your key here
+    "amount": "{{ order['amount'] }}",
+    "currency": "INR",
+    "name": "ShowTime",
+    "description": "Ticket Booking",
+    "order_id": "{{ order['id'] }}",
+
+    "handler": function (response){
+
+        fetch("/payment_success", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                payment_id: response.razorpay_payment_id,
+                order_id: response.razorpay_order_id
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.status == "success"){
+                window.location.href = "/dashboard";
+            } else {
+                alert("Payment failed");
+            }
+        });
+    },
+
+    "theme": {
+        "color": "#f84464"
+    }
+};
+
+var rzp = new Razorpay(options);
+
+document.getElementById('pay-btn').onclick = function(e){
+    rzp.open();
+    e.preventDefault();
+}
+</script>
+
+</body>
+</html>

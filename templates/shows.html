@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Show</title>
+    <style>
+        body {
+            background: #0a0a0f;
+            color: white;
+            font-family: 'DM Sans', sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #1a1a24;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .theater {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .details {
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .btn {
+            background: #f84464;
+            padding: 10px 20px;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #e0304f;
+        }
+    </style>
+</head>
+<body>
+
+<h1>{{ movie }} - Select Theater & Timing</h1>
+
+{% for show in shows %}
+<div class="card">
+    <div class="info">
+        <div class="theater">{{ show.theater }}</div>
+        <div class="details">
+            Time: {{ show.time }} | Seats Available: {{ show.seats }}
+        </div>
+    </div>
+
+    <a href="/seats/{{ movie }}/{{ show.time }}">
+        <button class="btn">Select</button>
+    </a>
+</div>
+{% endfor %}
+
+</body>
+</html>

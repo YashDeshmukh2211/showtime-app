@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ShowTime</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0a0a0f;
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #111;
+}
+
+.nav-logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff3c5a;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-right button {
+    margin-left: 10px;
+    padding: 6px 14px;
+    border: none;
+    background: #ff3c5a;
+    color: white;
+    cursor: pointer;
+}
+
+/* SECTION */
+.section {
+    padding: 30px;
+}
+
+.section h2 {
+    margin-bottom: 15px;
+}
+
+/* GRID */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background: #1a1a1f;
+    padding: 10px;
+    border-radius: 10px;
+    width: 180px;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.btn {
+    margin-top: 10px;
+    padding: 6px;
+    background: #ff3c5a;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-logo">ShowTime</div>
+
+    <div class="nav-links">
+        <a href="#movies">Movies</a>
+        <a href="#plays">Plays</a>
+        <a href="#events">Events</a>
+        <a href="#sports">Sports</a>
+        <a href="#comedy">Comedy</a>
+    </div>
+
+    <div class="nav-right">
+        <a href="/host_login"><button>Host</button></a>
+        <a href="/login"><button>Sign In</button></a>
+    </div>
+</div>
+
+<!-- MOVIES -->
+<div class="section" id="movies">
+    <h2>Movies</h2>
+    <div class="grid">
+        {% for m in movies %}
+        <div class="card">
+            <img src="{{ m.image }}">
+            <h3>{{ m.title }}</h3>
+            <button class="btn" onclick="bookNow('{{ m.title|e }}')">Book</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- PLAYS -->
+<div class="section" id="plays">
+    <h2>Live Plays</h2>
+    <div class="grid">
+        {% for p in plays %}
+        <div class="card">
+            <img src="{{ p.image }}">
+            <h3>{{ p.title }}</h3>
+            <button class="btn" onclick="bookNow('{{ p.title|e }}')">Book</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- EVENTS -->
+<div class="section" id="events">
+    <h2>Events</h2>
+    <div class="grid">
+        {% for e in events %}
+        <div class="card">
+            <img src="{{ e.image }}">
+            <h3>{{ e.title }}</h3>
+            <button class="btn" onclick="bookNow('{{ e.title|e }}')">Book</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- SPORTS -->
+<div class="section" id="sports">
+    <h2>Sports</h2>
+    <div class="grid">
+        {% for s in sports %}
+        <div class="card">
+            <img src="{{ s.image }}">
+            <h3>{{ s.title }}</h3>
+            <button class="btn" onclick="bookNow('{{ s.title|e }}')">Book</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- COMEDY -->
+<div class="section" id="comedy">
+    <h2>Comedy Shows</h2>
+    <div class="grid">
+        {% for c in comedy %}
+        <div class="card">
+            <img src="{{ c.image }}">
+            <h3>{{ c.title }}</h3>
+            <button class="btn" onclick="bookNow('{{ c.title|e }}')">Book</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function bookNow(title) {
+    window.location.href = "/book/" + title;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+
+<style>
+body {
+    background: #0a0a0f;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+input {
+    padding: 8px;
+    margin: 5px;
+}
+
+button {
+    padding: 8px 15px;
+    background: #ff3c5a;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.card {
+    background: #1a1a1f;
+    padding: 10px;
+    margin: 10px auto;
+    width: 60%;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🎬 Admin Panel</h1>
+
+<h2>Add New Show</h2>
+
+<form method="POST" action="/add_show">
+
+<input name="title" placeholder="Movie Name" required><br>
+<input name="city" placeholder="City (Pune)" required><br>
+<input name="theater" placeholder="Theater (Amanora Mall)" required><br>
+<input name="time" placeholder="Time (7 PM)" required><br>
+<input name="price" placeholder="Price (250)" required><br>
+
+<button>Add Show</button>
+
+</form>
+
+<hr>
+
+<h2>All Shows</h2>
+
+{% for s in shows %}
+<div class="card">
+    <b>{{ s.title }}</b><br>
+    {{ s.city }} - {{ s.theater }}<br>
+    {{ s.time }} | ₹{{ s.price }}
+</div>
+{% endfor %}
+
+</body>
+</html>

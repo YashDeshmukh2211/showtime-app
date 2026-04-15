@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Seats</title>
+    <style>
+        body {
+            background: #0a0a0f;
+            color: white;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 30px;
+        }
+
+        .seat {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        label {
+            padding: 15px 20px;
+            background: #1a1a24;
+            border: 1px solid #444;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"]:checked + label {
+            background: #f84464;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #f84464;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Select Seats for {{ movie }} ({{ time }})</h1>
+
+    <form method="POST" action="/confirm">
+
+    <!-- Hidden data -->
+    <input type="hidden" name="movie" value="{{ movie }}">
+    <input type="hidden" name="time" value="{{ time }}">
+
+    <h3>Select Seats:</h3>
+
+    {% for s in ['A1','A2','A3','B1','B2','B3'] %}
+        <div style="margin:10px; display:inline-block;">
+            <input type="checkbox" name="seats" value="{{ s }}" id="{{ s }}">
+            <label for="{{ s }}">{{ s }}</label>
+        </div>
+    {% endfor %}
+
+    <br><br>
+    <button type="submit">Confirm Booking</button>
+
+</form>
+
+</body>
+</html>
